@@ -4,7 +4,7 @@
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
         Title="Processes" Height="350" Width="525" MinHeight="350" MaxHeight="350" MinWidth="525" MaxWidth="525"
         Loaded="MainWindow_OnLoaded" Unloaded="MainWindow_OnUnloaded">
- 
+
     <Grid>
         <ListView Name="LvProcesses" ItemsSource="{Binding Processes}" HorizontalAlignment="Stretch" Height="243" Margin="10,10,0,0" VerticalAlignment="Top" Width="476" ScrollViewer.CanContentScroll="True" 
                   ScrollViewer.VerticalScrollBarVisibility="Auto" SelectionMode="Single"
@@ -16,8 +16,8 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Name="BtnStartStop" Content="Button" HorizontalAlignment="Left" Margin="10,288,0,0" VerticalAlignment="Top" Width="75" Click="BtnStartStop_OnClick"/>
-        <Button Name="BtnDetails" CommandParameter="TODO" Content="Details" HorizontalAlignment="Left" Margin="411,288,0,0" VerticalAlignment="Top" Width="75" Click="ShowDetails"/>
+        <Button Name="BtnStartStop" Content="Button" HorizontalAlignment="Left" Margin="26,272,0,0" VerticalAlignment="Top" Width="74" Click="BtnStartStop_OnClick"/>
+        <Button Name="BtnDetails"  Content="Details" HorizontalAlignment="Left" Margin="426,272,0,0" VerticalAlignment="Top" Width="76" Click="ShowDetails"/>
 
     </Grid>
 </Window>
