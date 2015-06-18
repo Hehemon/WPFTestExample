@@ -1,17 +1,17 @@
 ﻿<Window x:Class="WPFTestApplcation.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Processes" Height="350" Width="525" MinHeight="350" MaxHeight="350" MinWidth="525" MaxWidth="525">
     <Grid>
-        <ListView HorizontalAlignment="Left" Height="243" Margin="10,10,0,0" VerticalAlignment="Top" Width="476">
+        <ListView HorizontalAlignment="Stretch" Height="243" Margin="10,10,0,0" VerticalAlignment="Top" Width="476">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="10,288,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="411,288,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Name="BtnStartStop" Content="Button" HorizontalAlignment="Left" Margin="10,288,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Name="BtnDetails" Content="Details" HorizontalAlignment="Left" Margin="411,288,0,0" VerticalAlignment="Top" Width="75"/>
 
     </Grid>
 </Window>
