@@ -25,6 +25,7 @@ namespace WPFTestApplcation
         public MainWindow()
         {
             InitializeComponent();
+            _updater = UpdateListViewInUIThread;
         }
 
         private delegate void UpdateListViewDelegate(IEnumerable<ProcessInfo> current);
@@ -64,7 +65,6 @@ namespace WPFTestApplcation
         /// <param name="e"></param>
         private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
         {
-            _updater = UpdateListViewInUIThread;
             BtnStartStop.Content = ProcessManager.I.CurrentState ? "Stop" : "Start";
             ProcessManager.I.OnProcessUpdate += UpdateListEvent;
         }
