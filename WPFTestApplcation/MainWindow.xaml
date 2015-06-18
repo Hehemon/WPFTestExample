@@ -10,8 +10,8 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Name="BtnStartStop" Content="Button" HorizontalAlignment="Left" Margin="10,288,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Name="BtnDetails" Content="Details" HorizontalAlignment="Left" Margin="411,288,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Name="BtnStartStop" Command="{Binding StartStopCommand}" CommandParameter="StartStop" Content="Button" HorizontalAlignment="Left" Margin="10,288,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Name="BtnDetails" Command="{Binding DetailsCommand}" CommandParameter="TODO" Content="Details" HorizontalAlignment="Left" Margin="411,288,0,0" VerticalAlignment="Top" Width="75"/>
 
     </Grid>
 </Window>
