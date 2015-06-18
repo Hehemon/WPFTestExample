@@ -44,7 +44,28 @@ namespace WPFTestApplcation
         /// <param name="e"></param>
         private void BtnDetails_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            // TODO: check if item selected
+        }
+
+        /// <summary>
+        /// Subscribe to events
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            BtnStartStop.Content = ProcessManager.I.CurrentState ? "Stop" : "Start";
+            ProcessManager.I.OnProcessUpdate += UpdateListEvent;
+        }
+
+        /// <summary>
+        /// Process income messages with new processes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UpdateListEvent(object sender, ProcessUpdateEventArgs e)
+        {
+            
         }
     }
 }
