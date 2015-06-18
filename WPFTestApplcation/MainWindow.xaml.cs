@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -25,6 +26,9 @@ namespace WPFTestApplcation
         {
             InitializeComponent();
         }
+
+        private delegate void UpdateListViewDelegate(IEnumerable<ProcessInfo> current);
+        private readonly UpdateListViewDelegate _updater;
 
         /// <summary>
         /// Start/stop event handling
@@ -60,6 +64,7 @@ namespace WPFTestApplcation
         /// <param name="e"></param>
         private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
         {
+            _updater = UpdateListViewInUIThread;
             BtnStartStop.Content = ProcessManager.I.CurrentState ? "Stop" : "Start";
             ProcessManager.I.OnProcessUpdate += UpdateListEvent;
         }
@@ -71,7 +76,20 @@ namespace WPFTestApplcation
         /// <param name="e"></param>
         private void UpdateListEvent(object sender, ProcessUpdateEventArgs e)
         {
-            
+            LvProcesses.Dispatcher.Invoke(_updater, e.ProcessData);
+        }
+
+        /// <summary>
+        /// Updating data in listview
+        /// </summary>
+        /// <param name="e"></param>
+        private void UpdateListViewInUIThread(IEnumerable<ProcessInfo> data)
+        {
+            LvProcesses.Items.Clear();
+            foreach (var datum in data)
+            {
+                LvProcesses.Items.Add(new[] {datum.FriendlyName, datum.Id.ToString()});
+            }
         }
 
         /// <summary>
