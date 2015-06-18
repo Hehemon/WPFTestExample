@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -22,14 +23,25 @@ namespace WPFTestApplcation
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// For updating from not UI thread
+        /// </summary>
+        /// <param name="current"></param>
+        private delegate void UpdateListViewDelegate(IEnumerable<ProcessInfo> current);
+        private readonly UpdateListViewDelegate _updater;
+
+        private ObservableCollection<ProcessInfo> _processes = new ObservableCollection<ProcessInfo>();
+  
         public MainWindow()
         {
             InitializeComponent();
-            _updater = UpdateListViewInUIThread;
+            _updater = UpdateListViewInUiThread;
         }
 
-        private delegate void UpdateListViewDelegate(IEnumerable<ProcessInfo> current);
-        private readonly UpdateListViewDelegate _updater;
+        /// <summary>
+        /// Data binding for list view
+        /// </summary>
+        public ObservableCollection<ProcessInfo> Processes { get { return _processes; } }
 
         /// <summary>
         /// Start/stop event handling
@@ -47,15 +59,16 @@ namespace WPFTestApplcation
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BtnDetails_OnClick(object sender, RoutedEventArgs e)
+        private void ShowDetails(object sender, RoutedEventArgs e)
         {
-            var item = LvProcesses.SelectedItem;
+            var item = LvProcesses.SelectedItem as ProcessInfo;
             if (item == null)
             {
-                MessageBox.Show("No selected item in ListView");
+                MessageBox.Show("No selected item in ListView", "Details", MessageBoxButton.OK);
                 return;
             }
-            // TODO: process defining id of porcess and showing message box
+            var message = ProcessInfo.GetProcessDetails(item.Id);
+            MessageBox.Show(message, "Details", MessageBoxButton.OK);
         }
 
         /// <summary>
@@ -83,12 +96,12 @@ namespace WPFTestApplcation
         /// Updating data in listview
         /// </summary>
         /// <param name="e"></param>
-        private void UpdateListViewInUIThread(IEnumerable<ProcessInfo> data)
+        private void UpdateListViewInUiThread(IEnumerable<ProcessInfo> data)
         {
-            LvProcesses.Items.Clear();
+            _processes.Clear();
             foreach (var datum in data)
             {
-                LvProcesses.Items.Add(new[] {datum.FriendlyName, datum.Id.ToString()});
+                _processes.Add(datum);
             }
         }
 
@@ -100,6 +113,16 @@ namespace WPFTestApplcation
         private void MainWindow_OnUnloaded(object sender, RoutedEventArgs e)
         {
             ProcessManager.I.OnProcessUpdate -= UpdateListEvent;
+        }
+
+        /// <summary>
+        /// Reflect Details button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void LvProcesses_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            BtnDetails.IsEnabled = LvProcesses.SelectedIndex != -1;
         }
     }
 }

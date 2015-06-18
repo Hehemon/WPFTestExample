@@ -13,8 +13,8 @@ namespace WPFTestApplcation
     /// </summary>
     public class ProcessInfo : IEquatable<ProcessInfo>, ICloneable
     {
-        public readonly int Id;
-        public readonly string FriendlyName;
+        public int Id { get; protected set; }
+        public string FriendlyName { get; protected set; }
         public bool Removed { get; protected set; }
 
         public ProcessInfo(int id, string friendlyName)
