@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,27 @@ namespace WPFTestApplcation
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        /// <summary>
+        /// Start/stop event handling
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnStartStop_OnClick(object sender, RoutedEventArgs e)
+        {
+            ProcessManager.I.ChangeState();
+            BtnStartStop.Content = ProcessManager.I.CurrentState ? "Stop" : "Start";
+        }
+
+        /// <summary>
+        /// Details event handling
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnDetails_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }
