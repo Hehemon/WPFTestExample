@@ -44,7 +44,13 @@ namespace WPFTestApplcation
         /// <param name="e"></param>
         private void BtnDetails_OnClick(object sender, RoutedEventArgs e)
         {
-            // TODO: check if item selected
+            var item = LvProcesses.SelectedItem;
+            if (item == null)
+            {
+                MessageBox.Show("No selected item in ListView");
+                return;
+            }
+            // TODO: process defining id of porcess and showing message box
         }
 
         /// <summary>
@@ -66,6 +72,16 @@ namespace WPFTestApplcation
         private void UpdateListEvent(object sender, ProcessUpdateEventArgs e)
         {
             
+        }
+
+        /// <summary>
+        /// Unsubscribe from updating
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MainWindow_OnUnloaded(object sender, RoutedEventArgs e)
+        {
+            ProcessManager.I.OnProcessUpdate -= UpdateListEvent;
         }
     }
 }

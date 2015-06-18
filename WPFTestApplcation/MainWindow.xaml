@@ -3,9 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 
         Title="Processes" Height="350" Width="525" MinHeight="350" MaxHeight="350" MinWidth="525" MaxWidth="525"
-        Loaded="MainWindow_OnLoaded">
+        Loaded="MainWindow_OnLoaded" Unloaded="MainWindow_OnUnloaded">
     <Grid>
-        <ListView Name="LvProcesses" ItemsSource="{Binding}" HorizontalAlignment="Stretch" Height="243" Margin="10,10,0,0" VerticalAlignment="Top" Width="476" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto">
+        <ListView Name="LvProcesses" ItemsSource="{Binding}" HorizontalAlignment="Stretch" Height="243" Margin="10,10,0,0" VerticalAlignment="Top" Width="476" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" SelectionMode="Single">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="300" Header="Name" DisplayMemberBinding="{Binding Path=Name}"/>
